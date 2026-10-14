@@ -1,0 +1,104 @@
+{
+  "language": "en-GB",
+  "deepl_glossary_name": "Velora_UK_Terms",
+  "report_note": "UK style enforced (bonnet, wing, windscreen, brake disc, centre console). Units: 12.5, 5%, 20 °C, 200 N·m, numeric ranges with en dash (10–15).",
+
+  "scoring": {"error_penalty": 5, "warning_penalty": 2, "pass_threshold": 96},
+
+  "grammar_whitelist": ["eTrail", "Glidetex"],
+
+  "units": ["mm", "cm", "m", "km", "g", "kg", "ml", "l", "%", "°C", "N·m", "Nm", "km/h", "V", "W", "kW", "Wh", "kWh", "Ah", "bar"],
+
+  "forbidden_terms": [
+    {"wrong": "hood", "correct": "bonnet", "reason": "UK variant"},
+    {"wrong": "fender", "correct": "wing", "reason": "UK variant"},
+    {"wrong": "windshield", "correct": "windscreen", "reason": "UK variant"},
+    {"wrong": "trunk", "correct": "luggage compartment", "reason": "UK wording"},
+    {"wrong": "center", "correct": "centre", "reason": "UK spelling"},
+    {"wrong": "color", "correct": "colour", "reason": "UK spelling"},
+    {"wrong": "tire", "correct": "tyre", "reason": "UK spelling"},
+    {"wrong": "safety belt", "correct": "seat belt", "reason": "house style"},
+    {"wrong": "handbrake", "correct": "parking brake", "reason": "technical register"}
+  ],
+  "forbidden_phrase_whitelist": ["Trail Hood cover"],
+
+  "termbase": [
+    {"cz": "VELORA Originální příslušenství", "en": "VELORA Genuine Accessories"},
+    {"cz": "kapota", "en": "bonnet"},
+    {"cz": "blatník", "en": "wing"},
+    {"cz": "čelní sklo", "en": "windscreen"},
+    {"cz": "středová konzola", "en": "centre console"},
+    {"cz": "brzdový kotouč", "en": "brake disc"},
+    {"cz": "zavazadlový prostor", "en": "luggage compartment"}
+  ],
+
+  "regex_rules": [
+    {
+      "name": "Decimal separator",
+      "pattern": "\\b\\d+,(?!\\d{3}\\b)\\d+\\b",
+      "message": "Use dot as decimal separator in EN (12,5 → 12.5). Thousands separators (1,500) are allowed.",
+      "severity": "WARNING"
+    },
+    {
+      "name": "Percent spacing",
+      "pattern": "\\b\\d+\\s+%",
+      "message": "Remove space before % in EN (5 % → 5%).",
+      "severity": "WARNING"
+    },
+    {
+      "name": "Torque unit",
+      "pattern": "\\b\\d+\\s*nm\\b",
+      "message": "Use 'N·m' for torque (200 Nm → 200 N·m).",
+      "severity": "WARNING"
+    },
+    {
+      "name": "Temperature unit",
+      "pattern": "\\b\\d+\\s*°c\\b",
+      "message": "Capitalise C in °C.",
+      "severity": "WARNING",
+      "case_sensitive": true
+    },
+    {
+      "name": "Range dash",
+      "pattern": "\\b\\d+-\\d+\\s*(mm|cm|m|V|A|W|kW|N·m|Nm|%|°C)(?!\\w)",
+      "message": "Use en dash for numeric ranges: 10–15.",
+      "severity": "INFO",
+      "case_sensitive": true
+    },
+    {
+      "name": "Czech diacritics",
+      "pattern": "\\S*[ěščřžýáíéóúůťďň]\\S*",
+      "message": "Czech diacritics found in EN text.",
+      "severity": "WARNING"
+    },
+    {
+      "name": "Double spaces",
+      "pattern": "[^\\S\\r\\n]{2,}",
+      "message": "Multiple spaces found.",
+      "severity": "WARNING"
+    },
+    {
+      "name": "Brand name",
+      "pattern": "\\bVelora\\b",
+      "message": "Brand name must be written in capitals: VELORA.",
+      "severity": "ERROR",
+      "skip_if_uppercase": true,
+      "suggest": "VELORA"
+    },
+    {
+      "name": "Official accessories term",
+      "pattern": "\\b(Original\\s+Velora\\s+Accessories|Genuine\\s+Velora\\s+Accessories|Velora\\s+Genuine\\s+Acces+ories)\\b",
+      "message": "Use the official term 'VELORA Genuine Accessories'.",
+      "severity": "ERROR",
+      "allow_exact": "VELORA Genuine Accessories",
+      "suggest": "VELORA Genuine Accessories"
+    },
+    {
+      "name": "Model names",
+      "pattern": "\\b(Talvik|Ormen|Nivara|Kaelo)\\b",
+      "message": "Model names must be written in capitals (e.g. NIVARA).",
+      "severity": "INFO",
+      "skip_if_uppercase": true
+    }
+  ]
+}

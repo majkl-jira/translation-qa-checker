@@ -1,0 +1,19 @@
+# Secrets, real client rules & environment
+.env
+rules.json
+.venv/
+
+# Python cache
+__pycache__/
+*.pyc
+.pytest_cache/
+
+# OS / IDE
+.DS_Store
+.vscode/
+.idea/
+
+# Client documents and generated reports — keep only the empty folders
+Input/**/*.pdf
+Output/*
+!Output/.gitkeep
